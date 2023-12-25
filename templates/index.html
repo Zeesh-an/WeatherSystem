@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Data Visualization</title>
+</head>
+<body>
+    <h1>Sensor Data Visualization</h1>
+    
+    <div>
+        {{ combined_plot|safe }}
+    </div>
+
+    <div>
+        {{ temperature_plot|safe }}
+    </div>
+    
+    <div>
+        {{ humidity_plot|safe }}
+    </div>
+    
+    <div>
+        {{ co_plot|safe }}
+    </div>
+</body>
+</html>
