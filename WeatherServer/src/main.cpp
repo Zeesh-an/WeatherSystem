@@ -1,4 +1,3 @@
-
 #include <Arduino.h>
 #include <ArduinoOTA.h>
 #include <ESP8266WebServer.h>
@@ -37,7 +36,7 @@ const char *host = "script.google.com";
 const int httpsPort = 443;
 const char *fingerprint = "";
 // ID from Google Sheets
-const char *GScriptId = "AKfycbzq-Vy6hDr8wnSuuGrBx1bWgUoSByAzwDQnij2PXeG2-j3ZwIRmuPZRkj4fRsFUOAED";
+const char *GScriptId = "AKfycbzU2_2_gPnI9iIh42CC7Wdkl_pw3h6HadZdJNruprBYl54b-HkRwejnqZdRSTWMypMsyQ";
 String url = String("/macros/s/") + GScriptId + "/exec";
 // Enter command (insert_row or append_row) and your Google Sheets sheet name (Sheet name is Data)
 String payload_base = "{\"command\": \"insert_row\", \"sheet_name\": \"Data\", \"values\": ";
@@ -179,7 +178,7 @@ void setup()
     Serial.println(" on Port 80");
     server.on("/", handle_OnConnect);
     server.on("/debug", handle_OnDebug);
-    server.on("/force", handle_OnForce);
+    server.on("/force", upload_Data);
     server.onNotFound(handle_NotFound);
   }
 
@@ -344,7 +343,8 @@ void upload_Data()
   // Publish data to Google Sheets
   if (client->POST(url, host, payload))
   {
-    // success message here
+    Serial.println("Iploadedddddd");
+    handle_OnConnect();
   }
   else
   {
@@ -464,7 +464,7 @@ String SendHTML(float temperature, float humidity, float pressure, float heatind
   ptr += "</head>\n<body>";
   ptr += "\n<h2>&#127774; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#9925; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#9748;</h2>";
   ptr += "\n<h1>The Weather Station</h1>";
-  ptr += "\n<a href='https://goo.gl/maps/siG5j7HVcTYKySzz8'><h3>Westridge II</h3></a>";
+  ptr += "\n<a href='https://maps.app.goo.gl/u1voFXGwNocC1sc88'><h3>NUST H-12</h3></a>";
   ptr += "\n<table>\n";
   ptr += "<tr><td><div class='icon'>&#127777;&#65039;</div></td>";
   ptr += "<td><div class='reading temp'>" + String(temperature, 1) + "</div></td>";
@@ -478,7 +478,7 @@ String SendHTML(float temperature, float humidity, float pressure, float heatind
   ptr += "<tr><td><a href='/force'><div class='icon press2'>&#128347;</div></a></td>";
   ptr += "<td><div class='reading press'>" + String(pressure, 1) + "</div></td>";
   ptr += "<td><div class='press superscript'>hPa</div></td></tr>\n</table>";
-  ptr += "\n<div style='display:grid; position:fixed; bottom:0; text-align:center; width:100%'>&copy; MMXXIII Fawad Anwar<BR>";
-  ptr += "\n<span style='font-size:0.7em'>Ver 3.50 - 11 Jun 23</span></div></body>\n</html>";
+  ptr += "\n<div style='display:grid; position:fixed; bottom:0; text-align:center; width:100%'>&copy; MMXXIII Hamza Fawad Anwar<BR>";
+  ptr += "\n<span style='font-size:0.7em'>Ver 1.0 - 26 Dec 23</span></div></body>\n</html>";
   return ptr;
 }
